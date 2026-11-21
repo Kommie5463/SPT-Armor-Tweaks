@@ -4,7 +4,7 @@ using BepInEx.Configuration;
 namespace Kommie.ArmorTweaks
 {
 
-    [BepInPlugin("kommie.armortweaks", "Armor Tweaks", "1.0.0")]
+    [BepInPlugin("com.kommie.armortweaks", "Armor Tweaks", "1.1.0")]
     public class ArmorTweaksPlugin : BaseUnityPlugin
     {
         private void Awake()
@@ -16,9 +16,6 @@ namespace Kommie.ArmorTweaks
             ConfigEntry<bool> refurb = Config.Bind("Modules", "ArmorRefurbishment", true,
                 "Armor Refurbishment: drag a refurbishment kit onto gear to restore its inserts. " +
                 "The server mod has its own switch for this module (see its config.json).");
-
-            ConfigEntry<bool> readout = Config.Bind("Modules", "ArmorHealthReadout", true,
-                "Armor Health Readout: total armor points covering each body part, shown under its health in the inventory health screen.");
 
             kommie.armorstacking.ArmorStackingPlugin.ExtraAbsorption = Config.Bind("ArmorStacking", "ExtraAbsorption", 0f,
                 new ConfigDescription(
@@ -37,9 +34,6 @@ namespace Kommie.ArmorTweaks
 
             if (swap.Value) Kommie.SoftArmorSwap.SoftArmorSwapPlugin.Init(Logger);
             else Logger.LogInfo("Soft Armor Swap is switched off in the config.");
-
-            if (readout.Value) ArmorHealthReadout.Init(Logger);
-            else Logger.LogInfo("Armor Health Readout is switched off in the config.");
 
             if (refurb.Value) Kommie.ArmorRefurbishment.Client.ArmorRefurbishmentPlugin.Init(Logger);
             else Logger.LogInfo("Armor Refurbishment is switched off in the config.");
